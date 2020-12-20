@@ -1,0 +1,51 @@
+
+@font-face {
+ font-family: quotrfont;
+ src: url(../font/7.ttf);
+}
+
+
+
+
+.quot {
+ font-size: 110%;
+ font-weight: 200;
+ font-family: quotrfont;
+ text-align: center;
+ margin-bottom: 1rem;
+ max-width: 60%;
+ margin-left: 20%;
+ -webkit-animation: text-focus-in 1000ms  1 both;
+ animation: text-focus-in 1000ms cubic-bezier(.55, .085, .68, .53) 1 both
+}
+
+
+.quot:after,
+.quot:before {
+ font-size: 100%;
+}
+
+.quot:after {
+ content: "\00A0\201D";
+}
+
+.quot:before {
+ content: "\201C\00A0";
+}
+
+.quotr {
+ text-align: center;
+ display: block;
+ font-size: 80%;
+ font-family: quotrfont;
+ color: #6c757d;
+}
+
+.quotr:before {
+ content: "\2014\00A0";
+}
+/*
+.atz {
+ -webkit-animation: text-focus-in 5000ms cubic-bezier(.55, .085, .68, .53) 1 both;
+ animation: text-focus-in 5000ms cubic-bezier(.55, .085, .68, .53) 1 both
+}*/

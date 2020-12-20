@@ -1,0 +1,116 @@
+    body {
+      color: #282828;
+      font-family: sans-serif;
+      font-size: 15px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      word-break: auto;
+      hyphens: auto;
+      word-wrap: wrap;
+      background: #000;
+      scroll-behavior: smooth;
+      background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(../img/fractal-2065885_1920.jpg) center center no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+    }
+
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+
+    .init {
+      border: 6px solid transparent;
+      position: relative;
+      padding-top: 8.3vh;
+      overflow-y: scroll;
+    }
+
+    .init header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 50px;
+      width: 100vw;
+      color: #f2f2f2;
+      background: #000;
+      padding: 0 .75rem;
+      color: #fff;
+      display: grid;
+      justify-content: space-between;
+      grid-template-columns: auto auto;
+      align-items: center;
+      align-content: center;
+      z-index: 100;
+    }
+
+    .init header div:first-child {
+      display: flex;
+      align-content: center;
+      align-items: center;
+    }
+
+    /*user info*/
+    .init header div:first-child span {
+      display: block;
+      color: #fff;
+    }
+
+    .init header svg {
+      width: 40px;
+      display: block;
+      margin:0 2px;
+    }
+
+    .init main #input-controls {
+      display: flex;
+      align-items: center;
+      align-content: center;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100vw;
+      height: 10vh !important;
+      z-index: 1000;
+      background: #010101;
+      color: #1FC5c8;
+      padding-top: 1.2px;
+    }
+
+    .init main #input-controls input[type="text"] {
+      width: 85vw;
+      height: 2.7rem;
+      padding: .75rem .25rem;
+      padding-left: 1rem;
+      font-size: 1rem;
+      background: transparent;
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, .2);
+      border-radius: 7px 0 0 7px;
+      border-right-color: transparent;
+      outline: none;
+
+    }
+
+    .init main #input-controls button {
+      padding: .5rem .25rem;
+      width: 15vw;
+      height: 2.7rem;
+      outline: none;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, .2);
+      border-radius: 0 7px 7px 0;
+    }
+
+    .init main #input-controls button img {
+      width: 28px;
+      vertical-align: center;
+    }
+
+    /*clear floats*/
+    main {
+      position: relative !important;
+      padding-bottom: 40vh;
+    }

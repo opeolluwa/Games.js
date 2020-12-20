@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="assets/css/initialize.css">
+  <style>
+    .container{
+      padding:  3rem;
+      padding-top: 25vh;
+      background: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <img id="img" src="assets/img/guess-the-number.png" alt="" />
+  </div>
+  <script async>
+   //animate the game name
+    document.querySelector('.container').animate([
+      //keyframes
+        { opacity: 0, filter: 'blur(25px)', height: '0vh' },
+        { opacity: 1, filter: 'blur(0px)', height: '100vh' }
+      ],
+      //animation controls | timing opacity
+      {
+        duration: 2500,
+        easing: 'ease-in-out',
+        fill: 'both',
+        delay: 300,
+      });
+    //transit to the game play file
+    setTimeout(() => {
+      window.location.assign('game-play.html')
+    }, 5650);
+  </script>
+</body>
+
+</html>

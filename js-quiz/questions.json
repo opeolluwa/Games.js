@@ -1,0 +1,280 @@
+[{
+"question": "Jubril found that thieves had entered his house in his absence. He went to the police to report the... ",
+"instruction": "fill the gap",
+ "options":[
+ "break out",
+ "break up",
+ "break in", 
+ "break into"],
+ "answer":"break in"
+},
+{
+"question": "After the accused was found guilty by the court, his counsel... before sentence was passed", 
+"instruction": "fill the gap",
+"options":[
+  "begged for mercy", 
+  "made a plea for mitigation" ,
+  "made an ovation",
+  "made a plea for litigation"
+  ],
+"answer":  "made a plea for mitigation"
+},
+{
+"question": "Four persons accused of recent … are being held by the security agents.",
+"instruction": "fill the gap",
+"options":[
+  "trafficking", 
+  "traviking", 
+  "trafficking", 
+  "traffiking"
+  ],
+"answer":  "trafficking"
+},
+{
+"question": "Gone are the days when he... enjoy patronage.", 
+"instruction": "fill the gap",
+"options":[
+  "would", 
+  "will", 
+  "used to" ,
+  "could"
+  ],
+"answer":  "used to" 
+},
+{
+"question": "He did not attend the final burial …", 
+"instruction": "fill the gap",
+"options":[
+  "rite",
+  "rights",
+  "right",
+  "rites"
+  ],
+"answer":"rites"
+},
+{
+"question": "The officer was compelled to... the suspect's car", 
+"instruction": "fill the gap",
+"options":[
+  "seize", 
+  "cease ",
+  "sieze", 
+  "sease"
+  ],
+"answer":  "seize"
+},
+{
+"question": "A number of doctors are not so well disposed to … in government hospitals these days, … they?",
+"instruction": "fill the gap",
+"options":[
+  "working/do", 
+  "work/are", 
+  "working/are", 
+  "work/aren't"
+  ],
+"answer":  "working/are"
+},
+{
+"question": " If you are going to the market, may I... please? ", "instruction": "fill the gap",
+"options":[
+"follow you", 
+"come with you", 
+"come by you", 
+"come as your second" 
+  ],
+"answer":"come with you"
+},
+{
+"question": "Wada said that t#o of his chickens … eggs yesterday morning", 
+"instruction": "fill the gap",
+"options":[
+  "lain",
+  "lied",
+  "layed",
+  "laid"
+  ],
+"answer":"layed"
+},
+{
+"question": "Thank you for the party, we really... ", 
+"instruction": "fill the gap",
+"options":[
+  "enjoyed ourselves",
+  "enjoyed",
+  "enjoyed very much", 
+  "enjoyed too much"
+  ],
+"answer":"enjoyed"
+},
+{
+"question": "The culprits will __surrender__ their loot to the customs officials", 
+"instruction": "nearest in meaning",
+"options":[
+  "give away",
+  "give in",
+  "give out",
+  "give up"
+  ],
+"answer":"give in"
+},
+{
+"question": "The discussion became __animated__",
+"instruction": "nearest in meaning",
+"options":[
+  "specialized", 
+  "lively", 
+  "intellectual", 
+  "unruly"
+  ],
+"answer":"lively"
+},
+{
+"question": "Rich citizens are often __niggardly__ in their ways ", 
+"instruction": "nearest in meaning",
+"options":[
+  "beggarly", 
+  "sordid", 
+  "miserly", 
+  "pompous" 
+  ],
+"answer":  "miserly"
+},
+{
+"question": "The musician's popularity is beginning to __decline__.", 
+"instruction": "nearest in meaning",
+"options":[
+  "change", 
+  "wane", 
+  "slide", 
+  "disappear"
+  ],
+"answer":"wane"
+},
+{
+"question": "Olu promised to __look out for__ her next time he is in town ", "instruction": "nearest in meaning",
+"options":[
+  "watch for", 
+  "visit", 
+  "greet", 
+  "take care of"
+  ],
+"answer":  "visit"
+},
+{
+"question": "Finally, I assured him that I would not __go back on my word__.",
+"instruction": "nearest in meaning",
+"options":[
+  "return to a place", 
+  "return to a certain word when reading", 
+  "re-use my word", 
+  "fail to keep my promise" 
+  ],
+"answer":  "fail to keep my promise"
+},
+{
+"question": "The speaker __took his audience down memory lane__ before he went to the topic of his lecture.", "instruction": "nearest in meaning",
+"options":[
+ "took his audience on a journey through a street called Memory Lane", 
+  "recalled events from the past", 
+  "told a tale about a place called Memory Lane", 
+  "gave an outline of his lecture" 
+  ],
+"answer":  "recalled events from the past"
+},
+{
+"question": "The student who went home without an exeat has apologised... his misconduct", "instruction": "fill the gap",
+"options":[
+  "on",
+  "at",
+  "for",
+  "about"
+  ],
+"answer":"for"
+},
+{
+"question": "The man has atoned... his sins",
+"instruction": "fill the gap",
+"options":[
+  "for",
+  "of",
+  "about",
+  "all"
+  ],
+"answer":"for"
+},
+{
+"question": "The Headmaster was interviewed in connection... the expansion project.", 
+"instruction": "fill the gap",
+"options":[
+  "to", 
+  "with", 
+  "for", 
+  "about"
+  ],
+"answer":"with"
+},
+{
+"question": "What do you want me to do now? I'm… withdrawing and keeping quiet", "instruction": " ",
+"options":[
+  "for", 
+  "with", 
+  "up" ,
+  "on"
+  ],
+"answer":  "for" 
+
+},
+{
+"question": "I meant... a pencil but there was no one... them.", "instruction": "fill the gap",
+"options":[
+  "buying/selling",
+  "to buy/to sell", 
+  "buying/to sell", 
+  "buy/to sell", 
+  "to buy/selling" 
+  ],
+"answer":  "to buy/selling" 
+},
+{
+"question": "Mrs. Okoro... in this school since 1975. ",
+"instruction": "fill the gap",
+"options":[
+  "taught", 
+  "is teaching", 
+  "was teaching", 
+  "teaches", 
+  "has been teaching" 
+  ],
+"answer":  "has been teaching" 
+},
+{
+"question": "Paulina arrived late, she... the right route. ", 
+"instruction": "fill the gap",
+"options":[
+  "cannot have taken", 
+  "could not have taking", 
+  "could not had taken", 
+  "could not have taken" 
+  ],
+"answer":  "could not have taken" 
+},
+{
+"question": "The Governor has … to the people of many occasions.", "instruction": "fill the gap",
+"options":[
+  "broadcast", 
+  "been broadcast", 
+  "broadcasted", 
+  "been broadcasted"
+  ],
+"answer": "broadcast"
+},
+{
+"question": "We are all hungry; we... anything to eat since, morning.", "instruction": "fill the gap",
+"options":[
+  "didn't have", 
+  "haven't had", 
+  "never had", 
+  "hadn't had"
+  ],
+"answer":  "haven't had"
+}]
