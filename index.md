@@ -1,10 +1,18 @@
 ## Welcome to Games.js
 
-You can use the [editor on GitHub](https://github.com/opeolluwa/Games.js/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Collection of games built with web development trio
+trio
+ 
+1. GUESS THE NUMBER
+- Interactive number-guessing game 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Demo
+- [play demo](https://opeolluwa.github.io/games.js/guess-the-number/)
 
-### Markdown
+## Download mobile app
+- Download [android app](http://app.appsgeyser.com/12827584/Guess%20The%20Number)
+
+
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
