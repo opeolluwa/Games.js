@@ -4,12 +4,11 @@ Collection of games built with web development trio
 trio
  
 ## 1. GUESS THE NUMBER
-   - Interactive number-guessing game 
-### play Demo
-  - [play demo](https://opeolluwa.github.io/games.js/guess-the-number/)
+   Interactive number-guessing game 
 
-### Download mobile app
-   - Download [android app](http://app.appsgeyser.com/12827584/Guess%20The%20Number)
+### [play demo](https://opeolluwa.github.io/games.js/guess-the-number/)
+
+### [android app](http://app.appsgeyser.com/12827584/Guess%20The%20Number)
 
 
 
