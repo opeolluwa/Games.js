@@ -1,11 +1,11 @@
 
 ## A collection of games built using the web development trio.
 
-1. [Guess the Number](https://opeolluwa.github.io/guess-the-number/) : 
+### [Guess the Number](https://opeolluwa.github.io/guess-the-number/) : 
 
-2. [word-fix](https://opeolluwa.github.io/guess-the-number/)
+### [word-fix](https://opeolluwa.github.io/guess-the-number/)
 
-3. [js-quix]()
+### [js-quix]()
 
 
 ```markdown
