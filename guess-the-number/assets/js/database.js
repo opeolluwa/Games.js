@@ -51,7 +51,7 @@ function updatePlayerData() {
   //fetch data
   let data = localStorage.getItem(document.getElementById("userName").innerText.toUpperCase())
   //log data
-  console.log(data)
+  //console.log(data)
 
 
 }
