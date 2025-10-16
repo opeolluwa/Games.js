@@ -20,3 +20,8 @@ window.addEventListener("DOMContentLoaded", () => {
     greet();
   });
 });
+
+
+
+// import "./app.ts"
+import "./render.ts"
