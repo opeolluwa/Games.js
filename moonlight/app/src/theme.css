@@ -1,0 +1,29 @@
+
+
+:root {
+    --color-app-brown: oklch(74.307% 0.04878 64.851);
+    --color-app-brown-50: oklch(100% 0 none);
+    --color-app-brown-100: oklch(98.309% 0.00341 67.783);
+    --color-app-brown-200: oklch(92.296% 0.01386 67.654);
+    --color-app-brown-300: oklch(86.291% 0.02537 65.538);
+    --color-app-brown-400: oklch(80.444% 0.03649 65.889);
+    --color-app-brown-500: oklch(74.307% 0.04878 64.851);
+    --color-app-brown-600: oklch(65.98% 0.06636 64.677);
+    --color-app-brown-700: oklch(56.509% 0.06476 64.225);
+    --color-app-brown-800: oklch(45.931% 0.05123 64.862);
+    --color-app-brown-900: oklch(34.846% 0.03668 62.803);
+    --color-app-brown-950: oklch(28.829% 0.02835 64.035);
+
+    --color-spring-leaves: oklch(58.205% 0.06063 156.17);
+    --color-spring-leaves-50: oklch(85.94% 0.02452 159.07);
+    --color-spring-leaves-100: oklch(83.089% 0.03063 157.77);
+    --color-spring-leaves-200: oklch(77.152% 0.04051 158.07);
+    --color-spring-leaves-300: oklch(71.113% 0.05154 156.81);
+    --color-spring-leaves-400: oklch(65.266% 0.06355 156.27);
+    --color-spring-leaves-500: oklch(58.205% 0.06063 156.17);
+    --color-spring-leaves-600: oklch(47.631% 0.04863 155.79);
+    --color-spring-leaves-700: oklch(36.46% 0.0347 157.03);
+    --color-spring-leaves-800: oklch(24.308% 0.02046 156.62);
+    --color-spring-leaves-900: oklch(7.9435% 0.00953 144.61);
+    --color-spring-leaves-950: oklch(0% 0 none);
+}

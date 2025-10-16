@@ -13,7 +13,10 @@
     "@tailwindcss/vite": "^4.1.14",
     "@tauri-apps/api": "^2",
     "@tauri-apps/plugin-opener": "^2",
+    "rxdb": "^16.19.1",
+    "rxjs": "^7.8.2",
     "tailwindcss": "^4.1.14",
+    "ulid": "^3.0.1",
     "vue": "^3.5.22"
   },
   "devDependencies": {
