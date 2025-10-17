@@ -1,4 +1,5 @@
 
+@import "tailwindcss";
 
 :root {
     --color-app-brown: oklch(74.307% 0.04878 64.851);
@@ -14,16 +15,16 @@
     --color-app-brown-900: oklch(34.846% 0.03668 62.803);
     --color-app-brown-950: oklch(28.829% 0.02835 64.035);
 
-    --color-spring-leaves: oklch(58.205% 0.06063 156.17);
-    --color-spring-leaves-50: oklch(85.94% 0.02452 159.07);
-    --color-spring-leaves-100: oklch(83.089% 0.03063 157.77);
-    --color-spring-leaves-200: oklch(77.152% 0.04051 158.07);
-    --color-spring-leaves-300: oklch(71.113% 0.05154 156.81);
-    --color-spring-leaves-400: oklch(65.266% 0.06355 156.27);
-    --color-spring-leaves-500: oklch(58.205% 0.06063 156.17);
-    --color-spring-leaves-600: oklch(47.631% 0.04863 155.79);
-    --color-spring-leaves-700: oklch(36.46% 0.0347 157.03);
-    --color-spring-leaves-800: oklch(24.308% 0.02046 156.62);
-    --color-spring-leaves-900: oklch(7.9435% 0.00953 144.61);
-    --color-spring-leaves-950: oklch(0% 0 none);
+    --color-app-green: oklch(58.205% 0.06063 156.17);
+    --color-app-green-50: oklch(85.94% 0.02452 159.07);
+    --color-app-green-100: oklch(83.089% 0.03063 157.77);
+    --color-app-green-200: oklch(77.152% 0.04051 158.07);
+    --color-app-green-300: oklch(71.113% 0.05154 156.81);
+    --color-app-green-400: oklch(65.266% 0.06355 156.27);
+    --color-app-green-500: oklch(58.205% 0.06063 156.17);
+    --color-app-green-600: oklch(47.631% 0.04863 155.79);
+    --color-app-green-700: oklch(36.46% 0.0347 157.03);
+    --color-app-green-800: oklch(24.308% 0.02046 156.62);
+    --color-app-green-900: oklch(7.9435% 0.00953 144.61);
+    --color-app-green-950: oklch(0% 0 none);
 }

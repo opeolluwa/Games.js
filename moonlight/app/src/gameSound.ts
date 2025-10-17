@@ -3,4 +3,5 @@ export function playSound(src: string) {
     audio.play().then((res) => {
         console.log(res)
     });
+    return audio
 }
