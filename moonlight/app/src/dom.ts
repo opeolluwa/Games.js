@@ -4,6 +4,8 @@ export const highScoreScreen = document.querySelector("#highScoreScreen");
 export const controlsScreen = document.querySelector("#controlsScreen");
 export const gamePlayScreen = document.querySelector("#gamePlay");
 
+export const gameMainScreen = document.querySelector("#gameMainScreen");
+
 export const playGameBtn = document?.querySelector("#gamePlayBtn");
 export const highScoreBtn = document.querySelector("#highScoreBtn");
 export const controlsBtn = document.querySelector("#controlsBtn");
