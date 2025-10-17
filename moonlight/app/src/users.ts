@@ -10,10 +10,10 @@ export async function findOrCreateUser(username: string) {
         }
     }).exec();
 
-    // if (user) {
-    //     alert("user exists")
-    //     return;
-    // }
+    if (user) {
+        alert("user exists")
+        return;
+    }
 
     await appDatabase.users.insert({
         identifier: ulid(),

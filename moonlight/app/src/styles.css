@@ -17,3 +17,62 @@ html, body {
     width: 100%;
     box-sizing: border-box;
 }
+
+#app #gameMainScreen {
+    padding: 0 !important;
+
+}
+
+
+#app #gameMainScreen #header {
+    background:  #010101;
+}
+
+
+#app #gameMainScreen #input-controls {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 10vh !important;
+    z-index: 1000;
+    background: #010101;
+    color: #1FC5c8;
+    padding-top: 1.2px;
+}
+
+
+#app #gameMainScreen #input-controls input[type="text"] {
+    width: 85vw;
+    height: 2.7rem;
+    padding: .75rem .25rem;
+    padding-left: 1rem;
+    font-size: 1rem;
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, .2);
+    border-radius: 7px 0 0 7px;
+    border-right-color: transparent;
+    outline: none;
+
+}
+
+
+#app #gameMainScreen #input-controls button {
+    padding: .5rem .25rem;
+    width: 15vw;
+    height: 2.7rem;
+    outline: none;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, .2);
+    border-radius: 0 7px 7px 0;
+}
+
+
+#app #gameMainScreen #input-controls button img {
+    width: 28px;
+    vertical-align: center;
+}
