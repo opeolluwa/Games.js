@@ -38,7 +38,7 @@ function writeText(message: string, actor: "machine" | "player") {
 }
 
 
-export const writePlayerText = (message: string) => writeText(message, 'player')
+export const writePlayerText = (message: number | string) => writeText(message.toString(), 'player')
 export const writeMachineText = (message: string) => writeText(message, 'machine')
 
 

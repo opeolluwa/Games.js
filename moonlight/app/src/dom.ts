@@ -21,12 +21,12 @@ export const gamePromptFormInput: HTMLInputElement | null = document?.querySelec
 
 
 export const machineTextStylesheet = {
-    maxWidth: '85%',
+    maxWidth: '55%',
     backgroundColor: '#2D2D2D',
     color: '#fff',
     padding: '15px 25px',
     borderRadius: '8px 25px 25px 18px',
-    marginBottom: '12px',
+    marginBottom: '1rem',
     marginLeft: '5px'
 }
 
