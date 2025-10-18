@@ -1,4 +1,4 @@
-import {gameMainScreen, gamePromptForm} from "./dom.ts";
+import {gameMainScreen, gamePromptForm, machineTextStylesheet, playerTextStylesheet} from "./dom.ts";
 import {playSound} from "./gameSound.ts";
 
 
@@ -8,22 +8,30 @@ export const getItem = (collection: string[]): string => {
 }
 
 
-export function writeText(sampleText: string) {
+// a shared function to write user's or machine's text
+function writeText(message: string, actor: "machine" | "player") {
     const element = document.createElement('p');
-    Object.assign(element.style, chatElementStyles)
+    let stylesheet
+
+    if (actor == "machine") {
+        stylesheet = machineTextStylesheet
+    } else {
+        stylesheet = playerTextStylesheet
+    }
+
+    Object.assign(element.style, stylesheet)
     gameMainScreen?.appendChild(element);
 
-    const sentence: string[] = sampleText.split(' ');
+    const sentence: string[] = message.split(' ');
     for (let word = 0; word < sentence.length; word++) {
         window.setTimeout(() => {
             element.innerText += ` ${sentence[word]}`;
         }, (word * 125));
 
     }
-    //add sound to each write() function
-    gamePromptForm.addEventListener('submit', (e) => {
-        e.preventDefault()
-        playSound("/sound/game-new-message.mp3")
-    });
-
 }
+
+
+export const writePlayerText = (message: string) => writeText(message, 'player')
+export const writeMachineText = (message: string) => writeText(message, 'machine')
+

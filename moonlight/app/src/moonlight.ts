@@ -8,15 +8,14 @@ import {
 } from "./dom";
 import {playSound} from "./gameSound";
 import {MAIN_SCREEN_DELAY} from "./constants.ts";
-import {getItem, writeText} from "./utils.ts";
+import {getItem, writeMachineText, writePlayerText} from "./utils.ts";
 import {emoji, replies} from "./resources.ts";
+import _ from 'lodash'
 
-
-let username: string | undefined = null;
+let username: string | undefined = '';
 
 
 document.addEventListener("DOMContentLoaded", () => {
-
     const sound = playSound("/sound/game-loop.mp3");
 
     window.setTimeout(() => {
@@ -29,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
         gamePlayScreen?.classList.add("hidden");
         // mainScreen?.classList.remove("hidden");
         gameMainScreen?.classList.remove("hidden")
-        playGame()
+        initGame()
 
     });
 
@@ -40,27 +39,48 @@ document.addEventListener("DOMContentLoaded", () => {
         gameMainScreen?.classList.remove("hidden")
 
     });
+
+    // add sound to each write() function
+    // gamePromptForm?.addEventListener('submit', (e) => {
+    //     e.preventDefault()
+    //     playSound("/sound/game-new-message.mp3")
+    //
+    //     if (gamePromptFormInput?.value) {
+    //         gameMainScreen?.appendChild(usernameInput)
+    //         usernameInput.innerText = gamePromptFormInput?.value;
+    //
+    //         writeText(`${getItem(replies.welcome)} ${gamePromptFormInput?.value} ${getItem(emoji.goodFeedBack)}`)
+    //     }
+    // });
 });
 
 
-function playGame() {
-    writeText('Provide your name to get started.');
-
-    const usernameInput = document.createElement('p');
+function runGame() {
+    writeMachineText('Provide your name to get started.');
 
 
-    gamePromptForm?.addEventListener('submit', (e) => {
-        e.preventDefault()
-        if (gamePromptFormInput?.value) {
-            gameMainScreen?.appendChild(usernameInput)
-            usernameInput.innerText = gamePromptFormInput?.value;
-
-            writeText(`${getItem(replies.welcome)} ${gamePromptFormInput?.value} ${getItem(emoji.goodFeedBack)}`)
-        }
-    })
-
-
+    // gamePromptForm?.addEventListener('submit', (e) => {
+    //     e.preventDefault()
+    //     if (gamePromptFormInput?.value) {
+    //         gameMainScreen?.appendChild(usernameInput)
+    //         usernameInput.innerText = gamePromptFormInput?.value;
+    //
+    //         writeText(`${getItem(replies.welcome)} ${gamePromptFormInput?.value} ${getItem(emoji.goodFeedBack)}`)
+    //     }
+    // })
 
 
 }
 
+function initGame() {
+    writeMachineText('Provide your name to get started.');
+    gamePromptForm?.addEventListener('submit', (e) => {
+        e.preventDefault()
+        if (gamePromptFormInput?.value) {
+            username = _.capitalize(gamePromptFormInput?.value)
+            writePlayerText(String(username))
+            gamePromptFormInput.value = ""
+            // writePlayerText(`${getItem(replies.welcome)} ${username} ${getItem(emoji.goodFeedBack)}`)
+        }
+    })
+}

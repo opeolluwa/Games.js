@@ -20,7 +20,7 @@ export const gamePromptForm: HTMLFormElement | null = document?.querySelector("#
 export const gamePromptFormInput: HTMLInputElement | null = document?.querySelector("#input-controls form input");
 
 
-export const chatElementStylesheet = {
+export const machineTextStylesheet = {
     maxWidth: '85%',
     backgroundColor: '#2D2D2D',
     color: '#fff',
@@ -29,3 +29,18 @@ export const chatElementStylesheet = {
     marginBottom: '12px',
     marginLeft: '5px'
 }
+
+
+export const playerTextStylesheet = {
+    display: "flex",
+    backgroundColor: "oklch(58.205% 0.06063 156.17)",
+    color: "#fff",
+    padding: "15px 25px",
+    borderRadius: "8px 25px 25px 18px",
+    marginBottom: "12px",
+    marginLeft: "auto",
+    marginTop: "1rem",
+    maxWidth: "85%",
+    width: 'fit-content',
+    alignSelf: "flex-end",
+};
