@@ -1,18 +1,15 @@
 import {
     gameMainScreen,
-    gamePromptForm,
     machineTextStylesheet,
     playerTextStylesheet,
     typingStateStylesheet
 } from "./dom.ts";
-import {playSound} from "./gameSound.ts";
 
 
 export const getItem = (collection: string[]): string => {
     let index = Math.round(Math.random() * (collection.length - 1))
     return collection[index];
 }
-
 
 // a shared function to write user's or machine's text
 function writeText(message: string, actor: "machine" | "player") {

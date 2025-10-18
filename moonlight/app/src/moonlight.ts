@@ -1,6 +1,8 @@
 import {
     gameMainScreen,
-    gamePlayScreen, gamePromptForm, gamePromptFormInput,
+    gamePlayScreen,
+    gamePromptForm,
+    gamePromptFormInput,
     playGameBtn,
     splashScreen,
     usernameForm,
@@ -13,8 +15,6 @@ import {emoji, replies} from "./resources.ts";
 import _ from 'lodash'
 import {ulid} from "ulid";
 
-
-let exitGame = false;
 
 const numberGenerator = () => Math.round(Math.random() * 100);
 let guess = numberGenerator();
@@ -155,7 +155,7 @@ export function checkGuess(targetValue: number, playerInput: number) {
 
     // Player guessed correctly
     else if (playerInput === targetValue) {
-
+        playSound("/sound/winner-sound.mp3")
         // win.innerText = `${++winCount}`;
         // updateCurrentAmount(100);
         // write(getItem(replies.equalTo));
