@@ -30,6 +30,13 @@ export const machineTextStylesheet = {
     marginLeft: '5px'
 }
 
+export const typingStateStylesheet = {
+    maxWidth: '85%',
+    padding: '15px 25px',
+    borderRadius: '8px 25px 25px 18px',
+    marginBottom: '12px',
+    marginLeft: '5px'
+}
 
 export const playerTextStylesheet = {
     display: "flex",
