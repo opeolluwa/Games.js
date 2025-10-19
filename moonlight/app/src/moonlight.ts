@@ -85,6 +85,7 @@ function initGame() {
             const username = _.capitalize(gamePromptFormInput?.value);
             writePlayerText(String(username));
             gamePromptFormInput.value = "";
+            gamePromptFormInput.type = 'number'
             writeMachineText(`${getItem(replies.welcome)} ${username} ${getItem(emoji.goodFeedBack)}`);
         }
 

@@ -1,1 +1,1 @@
-export const MAIN_SCREEN_DELAY = 1000;
+export const MAIN_SCREEN_DELAY = 7500;

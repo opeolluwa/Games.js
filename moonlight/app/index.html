@@ -8,7 +8,7 @@
     <link
             href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
             rel="stylesheet">
-    <link rel="stylesheet" href="/src/assets/stylesheet/styles.css"/>
+    <link rel="stylesheet" href="/src/styles.css"/>
     <meta meta name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, interactive-widget=resizes-content">
     <title>moonlight</title>
@@ -18,11 +18,7 @@
 <body>
 <div id="app" class="">
     <div id="splashScreen" class="flex flex-col align-center justify-center overflow-hidden  h-full">
-        <h1 class="text-center text-7xl bg-red-500 poppins-medium animate__animated animate__tada">Moonlight</h1>
-        <div id="progressContainer" class="bg-app-green-50 h-2 w-full mt-2 rounded-full">
-            <div class="bg-app-green-400 w-[80%] h-1.5"></div>
-        </div>
-
+        <h1 class="text-center text-7xl bg-app-green-400 poppins-medium animate__animated animate__tada">Moonlight</h1>
     </div>
 
     <div id="gamePlay" class="flex flex-col align-center justify-between overflow-hidden hidden h-full">
@@ -55,15 +51,14 @@
                    autofocus>
         </form>
     </div>
-    <div id="gameMainScreen" class="hidden p-0 pb-48 relative">
-        <div class="h-16  mb-4 px-[25px] py-3" id="#header">
-
+    <div id="gameMainScreen" class="hidden p-0 pb-48 relative pt-48 h-screen overflow-y-scroll overflow-x-hidden">
+        <div class="h-16  mb-6 px-[25px] bg-[#9CD1BD] text-white flex  w-100 z-50  py-3" id="#header">
         </div>
 
-        <div id="input-controls">
-            <form class="flex ">
-                <input type="text" name="inputFeed" id="inputFeed" value="" placeholder="Aa"/>
-                <button id="triggerSend" type="button">
+        <div id="input-cotrols text-app-green-800">
+            <form class="grid grid-col">
+                <input type="text" name="inputFeed" id="inputFeed" value="" placeholder="type here"/>
+                <button id="triggerSend" type="submit">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                          stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round"

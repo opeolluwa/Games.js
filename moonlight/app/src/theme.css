@@ -1,7 +1,6 @@
 
-@import "tailwindcss";
 
-:root {
+@theme {
     --color-app-brown: oklch(74.307% 0.04878 64.851);
     --color-app-brown-50: oklch(100% 0 none);
     --color-app-brown-100: oklch(98.309% 0.00341 67.783);

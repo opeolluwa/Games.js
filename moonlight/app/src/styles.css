@@ -1,8 +1,7 @@
 /*@import "./reset.css";*/
-@import "../../theme.css";
-@import "font.css";
-@import "../../../node_modules/tailwindcss/dist/lib.d.mts";
-
+@import "./theme.css";
+@import "./font.css";
+@import "tailwindcss";
 
 html, body {
     background: #F9F5F0;
@@ -19,7 +18,7 @@ html, body {
 }
 
 #app #gameMainScreen {
-    padding: 0 0 4rem !important;
+    padding: 0 0 300px !important;
     @apply h-screen overflow-y-scroll
 }
 
@@ -39,9 +38,9 @@ html, body {
     width: 100vw;
     height: 10vh !important;
     z-index: 1000;
-    background: #010101;
-    color: #1FC5c8;
+    background: #9CD1BD;
     padding-top: 1.2px;
+    color: var(--color-app-green-900);
 }
 
 
