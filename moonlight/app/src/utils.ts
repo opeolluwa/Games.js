@@ -50,3 +50,5 @@ export function injectTypingAnimation
     }, displayTimeout)
 }
 
+
+export const generateGuess = () => Math.round(Math.random() * 100);

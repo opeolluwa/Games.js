@@ -1,3 +1,6 @@
+import { balloons } from "balloons-js";
+import _ from "lodash";
+import { MAIN_SCREEN_DELAY } from "./constants.ts";
 import {
   gameMainScreen,
   gamePlayScreen,
@@ -5,45 +8,19 @@ import {
   gamePromptFormInput,
   playGameBtn,
   splashScreen,
-  usernameForm,
-  usernameFormInput,
 } from "./dom";
 import { playSound } from "./gameSound";
-import { MAIN_SCREEN_DELAY } from "./constants.ts";
+import { emoji, replies } from "./resources.ts";
 import {
+    generateGuess,
   getItem,
   injectTypingAnimation,
   writeMachineText,
   writePlayerText,
 } from "./utils.ts";
-import { emoji, replies } from "./resources.ts";
-import _ from "lodash";
-import { ulid } from "ulid";
-import { balloons, textBalloons } from "balloons-js";
 
-const numberGenerator = () => Math.round(Math.random() * 100);
-let guess = numberGenerator();
+let guess = generateGuess();
 alert(guess);
-
-interface User {
-  currentScore: number;
-  identifier: string;
-  username: string | undefined;
-  score: {
-    win: number;
-    loss: number;
-  };
-}
-
-const testUser: User = {
-  identifier: ulid(),
-  username: undefined,
-  score: {
-    win: 0,
-    loss: 0,
-  },
-  currentScore: 0,
-};
 
 document.addEventListener("DOMContentLoaded", () => {
   const sound = playSound("/sound/game-loop.mp3");
@@ -58,13 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
     gamePlayScreen?.classList.add("hidden");
     gameMainScreen?.classList.remove("hidden");
     initGame();
-  });
-
-  usernameForm?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    testUser.username = usernameFormInput?.value;
-    gamePlayScreen?.classList.add("hidden");
-    gameMainScreen?.classList.remove("hidden");
   });
 });
 
