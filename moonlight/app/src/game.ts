@@ -1,6 +1,13 @@
 import _ from "lodash";
 import { balloons } from "balloons-js";
-import { gameMainScreen, gamePlayScreen, gamePromptForm, gamePromptFormInput, playGameBtn, splashScreen } from "./dom";
+import {
+  gameMainScreen,
+  gamePlayScreen,
+  gamePromptForm,
+  gamePromptFormInput,
+  playGameBtn,
+  splashScreen,
+} from "./dom";
 import { GameEngine } from "./engine";
 import { Player } from "./player";
 import { replies, emoji } from "./resources";
@@ -11,7 +18,7 @@ import {
   getItem,
   injectTypingAnimation,
   writeMachineText,
-  writePlayerText
+  writePlayerText,
 } from "./utils";
 
 export class Moonlight extends GameEngine {
@@ -60,15 +67,23 @@ export class Moonlight extends GameEngine {
       writePlayerText(username);
       gamePromptFormInput.value = "";
 
-      writeMachineText(`${getItem(replies.welcome)} ${username} ${getItem(emoji.goodFeedBack)}`);
+      writeMachineText(
+        `${getItem(replies.welcome)} ${username} ${getItem(emoji.goodFeedBack)}`
+      );
       this.player = new Player(username);
 
       _.delay(injectTypingAnimation, 1000, 1500);
-      _.delay(writeMachineText, 2500, "You have five trials to guess a number. A correct guess awards you $100");
+      _.delay(
+        writeMachineText,
+        2500,
+        "You have five trials to guess a number. A correct guess awards you $100"
+      );
       _.delay(
         writeMachineText,
         4000,
-        `A wrong one deducts $20 from your current balance "${this.player?.getInformation().stats.win}"`
+        `A wrong one deducts $20 from your current balance "${
+          this.player?.getInformation().stats.win
+        }"`
       );
 
       this.cleanupListeners();
@@ -81,12 +96,14 @@ export class Moonlight extends GameEngine {
   private play(): void {
     this.guess = generateGuess();
     writeMachineText("Guess a number between 1 and 100");
+
     if (gamePromptFormInput) gamePromptFormInput.type = "number";
 
     this.cleanupListeners();
 
     this.handleSubmit = (e: SubmitEvent) => {
       e.preventDefault();
+
       const userInput = Number(gamePromptFormInput?.value);
       if (isNaN(userInput)) {
         writeMachineText("Please enter a valid number!");
@@ -95,18 +112,21 @@ export class Moonlight extends GameEngine {
 
       writePlayerText(String(userInput));
       gamePromptFormInput!.value = "";
-      this.checkGuess(userInput);
+
+      const result = this.checkGuess(userInput);
+
+      if (result === "win") {
+        _.delay(() => {
+          writeMachineText("🎉 You guessed it right! Make a new guess!");
+          this.play(); // recursively start a new round
+        }, 2000);
+      }
     };
 
     gamePromptForm?.addEventListener("submit", this.handleSubmit);
   }
 
-  private checkGuess(playerInput: number): void {
-    if (isNaN(playerInput)) {
-      writeMachineText("Please enter a valid number!");
-      return;
-    }
-
+  private checkGuess(playerInput: number): "win" | "continue" {
     const target = this.guess;
 
     if (playerInput >= target - 5 && playerInput < target) {
@@ -122,8 +142,10 @@ export class Moonlight extends GameEngine {
       balloons();
       playSound("/sound/winner-sound.mp3");
       this.updateCurrentAmount(+100);
-      writeMachineText("🎉 You guessed it right!");
+      return "win";
     }
+
+    return "continue";
   }
 
   private updateCurrentAmount(score: number): void {
