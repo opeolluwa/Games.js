@@ -77,10 +77,6 @@ body {
 }
 
 
-#app #gameMainScreen #input-controls button img {
-    width: 28px;
-    vertical-align: center;
-}
 
 
 /* HTML: <div class="loader"></div> */

@@ -36,6 +36,7 @@ export class Moonlight extends GameEngine {
     document.addEventListener("DOMContentLoaded", () => {
       this.gameLoopSound = playSound("/sound/game-loop.mp3");
       this.gameLoopSound.loop = true;
+      this.gameLoopSound.volume *= 0;
 
       window.setTimeout(() => {
         splashScreen?.classList.add("hidden");

@@ -5,9 +5,28 @@
     <meta charset="UTF-8" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
+    <link rel="preload" as="image" href="/img/moonshire.jpg">
+    <!-- Poppins font preloads -->
+    <link rel="preload" href="/fonts/Poppins-Thin.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/fonts/Poppins-ExtraLight.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/fonts/Poppins-Light.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/fonts/Poppins-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/fonts/Poppins-Medium.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/fonts/Poppins-SemiBold.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/fonts/Poppins-Bold.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/fonts/Poppins-ExtraBold.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/fonts/Poppins-Black.ttf" as="font" type="font/ttf" crossorigin>
+
+    <!-- Italic variants -->
+    <link rel="preload" href="/fonts/Poppins-ThinItalic.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/fonts/Poppins-ExtraLightItalic.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/fonts/Poppins-LightItalic.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/fonts/Poppins-Italic.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/fonts/Poppins-MediumItalic.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/fonts/Poppins-SemiBoldItalic.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/fonts/Poppins-BoldItalic.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/fonts/Poppins-ExtraBoldItalic.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/fonts/Poppins-BlackItalic.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="stylesheet" href="./src/assets/stylesheet/styles.css" />
     <meta meta name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, interactive-widget=resizes-content">
@@ -22,9 +41,9 @@
             </h1>
         </div>
 
-        <div id="gamePlay" class="flex flex-col align-center justify-between overflow-hidden hidden h-full">
+        <div id="gamePlay" class="flex flex-col align-center justify-between overflow-hidden h-full">
             <button
-                class="btn btn-lg btn-outline border-2 px-6 py-3 rounded-lg poppins-medium btn-accent w-fit flex justify-center items-center mx-auto mt-[45vh]"
+                class=" border-2 px-6 py-3 rounded-lg poppins-medium justify-center items-center mx-auto mt-[45vh] border-[#fdca00] text-[#fdca00]"
                 id="gamePlayBtn">
                 Play
             </button>
@@ -53,11 +72,11 @@
             </form>
         </div>
         <div id="gameMainScreen" class="hidden p-0 pb-48 relative pt-48 h-screen overflow-y-scroll overflow-x-hidden">
-            <div class="h-16  mb-6 px-[25px] text-white flex  w-100 z-50  py-3" id="#header">
+            <div class="h-16  bg-app-green-700 mb-6 px-[25px] text-white flex  w-100 z-50  py-3" id="#header">
             </div>
 
-            <div id="input-controls" class="text-app-green-800 fixed w-full py-2 rounded bottom-0">
-                <form class="grid grid-cols-12  justify-between bg-app-green-700">
+            <div id="input-controls" class="text-app-green-800 fixed w-full rounded bottom-0">
+                <form class="grid grid-cols-12  justify-between bg-app-green-700 py-0">
                     <input type="text" name="inputFeed" id="inputFeed" class="col-span-10" placeholder="type here "
                         value="" placeholder="type here" />
                     <button id="triggerSend" type="submit" class="col-span-2">
@@ -70,8 +89,6 @@
                 </form>
             </div>
         </div>
-
     </div>
 </body>
-
 </html>

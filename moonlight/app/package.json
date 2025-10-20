@@ -16,6 +16,7 @@
     "@types/pouchdb": "^6.4.2",
     "animate.css": "^4.1.1",
     "balloons-js": "^0.0.3",
+    "effector": "^23.4.4",
     "howler": "^2.2.4",
     "lodash": "^4.17.21",
     "pouchdb": "^9.0.0",
