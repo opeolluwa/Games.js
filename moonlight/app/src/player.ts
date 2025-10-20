@@ -20,6 +20,10 @@ export class Player {
     this.stats = stats;
   }
 
+  public get getStats(): Stats {
+    return this.stats;
+  }
+
   public getInformation(): { name: string; identifier: string; stats: Stats } {
     return {
       name: this.name,

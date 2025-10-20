@@ -1,3 +1,5 @@
-import "./dom.ts";
-import "animate.css";
-import "./moonlight.ts";
+
+import { Moonlight } from "./game";
+
+const game = new Moonlight();
+game.init();

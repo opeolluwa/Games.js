@@ -1,5 +1,7 @@
 export abstract class GameEngine {
-  public initGame(playerName: string) {}
+  public initGame() {}
 
   public runGame() {}
+
+  public start() {}
 }

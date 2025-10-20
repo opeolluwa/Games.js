@@ -2,6 +2,7 @@
 @import "./theme.css";
 @import "./font.css";
 @import "tailwindcss";
+@import "animate.css";
 
 html,
 body {

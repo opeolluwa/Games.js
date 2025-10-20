@@ -12,12 +12,13 @@ import {
 import { playSound } from "./gameSound";
 import { emoji, replies } from "./resources.ts";
 import {
-    generateGuess,
+  generateGuess,
   getItem,
   injectTypingAnimation,
   writeMachineText,
   writePlayerText,
 } from "./utils.ts";
+import { Player } from "./player.ts";
 
 let guess = generateGuess();
 alert(guess);
@@ -38,16 +39,17 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-let handleGamePromptSubmit;
+let handleGamePromptSubmit: (event: SubmitEvent) => void;
 
 function initGame() {
+  let player: Player | undefined = undefined;
+
   writeMachineText("Provide your name to get started.");
 
   if (handleGamePromptSubmit) {
     gamePromptForm?.removeEventListener("submit", handleGamePromptSubmit);
   }
 
-  // Define the handler
   handleGamePromptSubmit = (e: Event) => {
     e.preventDefault();
 
@@ -58,6 +60,7 @@ function initGame() {
       writeMachineText(
         `${getItem(replies.welcome)} ${username} ${getItem(emoji.goodFeedBack)}`
       );
+      player = new Player(username);
     }
 
     _.delay(injectTypingAnimation, 1000, 1500);
@@ -69,23 +72,20 @@ function initGame() {
     _.delay(
       writeMachineText,
       4000,
-      `A wrong one deducts $20 from your current balance "${testUser.currentScore}"`
+      `A wrong one deducts $20 from your current balance "${player?.getStats.win}"`
     );
 
-    // Remove listener after it runs once
     gamePromptForm?.removeEventListener("submit", handleGamePromptSubmit);
 
-    // Start the game logic
     play();
   };
 
-  // Add the listener
   gamePromptForm?.addEventListener("submit", handleGamePromptSubmit);
 }
 
 function play() {
   writeMachineText("Guess a number between 1 and 100");
-  gamePromptFormInput.type = "number";
+  gamePromptFormInput!.type = "number";
 
   // Remove old handler if any
   if (handleGamePromptSubmit) {
@@ -135,18 +135,9 @@ export function checkGuess(targetValue: number, playerInput: number) {
   else if (playerInput === targetValue) {
     balloons();
     playSound("/sound/winner-sound.mp3");
-    // win.innerText = `${++winCount}`;
-    // updateCurrentAmount(100);
-    // write(getItem(replies.equalTo));
-
-    // Start a new game after a short delay
-    // _.delay(newGame, 1500);
   }
-
-  // Reset input field after processing
-  // inputFeed.value = "";
 }
 
 export function updateCurrentAmount(score: number) {
-  testUser.currentScore += score;
+  console.log(score);
 }
