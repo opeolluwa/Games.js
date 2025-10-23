@@ -1,5 +1,5 @@
 
-import { Moonlight } from "./game";
+import { Moonlight } from "./moonlight.ts";
 
 const game = new Moonlight();
-game.init();
+await game.init();
