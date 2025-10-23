@@ -23,17 +23,6 @@ export class Database {
 
   async savePlayer(player: Player): Promise<void> {
     const info = player.getInformation();
-    // const existing = await this.findPlayerByName(info.name.toLowerCase());
-
-    // const doc = {
-    //   _id: existing?.getId ?? info.identifier,
-    //   name: info.name.toLowerCase(),
-    //   stats: {
-    //     winCount: info.stats["win"],
-    //     lossCount: info.stats["loss"],
-    //   },
-    //   ...(existing ? { _rev: (existing as any)._rev } : {}),
-    // };
 
     const doc = {
       _id: info.identifier,
