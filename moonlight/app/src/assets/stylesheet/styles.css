@@ -6,7 +6,7 @@
 
 html,
 body {
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.5);
     background-image: url('/img/moonshire.jpg');
     background-repeat: no-repeat;
     background-position: center center;
@@ -38,19 +38,7 @@ body {
 }
 
 
-#app #gameMainScreen #input-controls {
-    display: flex;
-    align-items: center;
-    align-content: center;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100vw;
-    height: 10vh !important;
-    z-index: 1000;
-    padding-top: 1.2px;
 
-}
 
 
 #app #gameMainScreen #input-controls input {

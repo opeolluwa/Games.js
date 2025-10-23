@@ -1,4 +1,7 @@
 import 'scripts/watch.just'
+import 'scripts/build.just'
+import 'scripts/package.just'
+import 'scripts/clean.just'
 import 'scripts/server.just'
 import 'scripts/android.just'
 
@@ -7,6 +10,9 @@ import 'scripts/android.just'
 alias install := install-dependencies
 alias config:= configure
 alias w := watch
+alias b := build
+alias c := clean
+alias p := package
 
 # Constants
 LAME_PATH := "app/src-tauri/sidecar/lame/bin/lame"

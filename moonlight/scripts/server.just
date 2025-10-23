@@ -25,7 +25,7 @@ DOCKER_CMD := "docker compose -f server/docker-compose.yaml"
     @just --list --list-heading $'Available commands\n'
 
 @server-lint:
-    cargo fmt && cargo fix
+    cargo fmt && cargo fix 
 
 @server-watch:
     {{ DOCKER_CMD }} up -d
@@ -35,17 +35,17 @@ DOCKER_CMD := "docker compose -f server/docker-compose.yaml"
     {{ DOCKER_CMD }} logs -f --tail='30' app
 
 @server-build:
-    cargo run build --release
+    cargo run build --release 
 
 @server-kill:
-    {{ DOCKER_CMD }} down -v
+    {{ DOCKER_CMD }} down -v 
 
 @server-restart:
     @just server-kill
     @just server-watch
 
 @server-rebuild:
-    docker compose -f server/docker-compose.yaml up --build
+    docker compose -f server/docker-compose.yaml up --build 
 
 [working-directory('server')]
 @server-build-production target:

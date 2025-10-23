@@ -6,7 +6,7 @@ watch target:
     @just "watch-{{target}}"
 
 [working-directory: 'app']
-@watch-android:
+@watch-android: 
     just android-watch
 
 [working-directory: 'app']
@@ -15,14 +15,14 @@ watch target:
 
 [working-directory: 'app']
 @watch-desktop:
-    npm run tauri dev
+    npm run tauri dev 
 
 [working-directory: 'app']
-@watch-frontend:
-    npm run dev
+@watch-frontend: 
+    npm run dev 
 
 
 
 [working-directory: 'server']
-@watch-server:
+@watch-server: 
    @just server-watch
