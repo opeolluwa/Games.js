@@ -11,6 +11,8 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@signaldb/core": "^1.7.1",
+    "@signaldb/localstorage": "^1.0.1",
     "@tailwindcss/vite": "^4.1.14",
     "@tauri-apps/api": "^2",
     "@tauri-apps/plugin-opener": "^2",
@@ -18,6 +20,7 @@
     "animate.css": "^4.1.1",
     "balloons-js": "^0.0.3",
     "effector": "^23.4.4",
+    "events": "^3.3.0",
     "howler": "^2.2.4",
     "install": "^0.13.0",
     "lodash": "^4.17.21",

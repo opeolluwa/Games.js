@@ -1,76 +1,59 @@
-import PouchDB from "pouchdb-browser";
-
-import PouchFind from "pouchdb-find";
 import { Player } from "./player";
 import { Stats } from "./stats";
-
-PouchDB.plugin(PouchFind);
-export const appDatabase = new PouchDB("moonlight");
+import { Collection } from "@signal/core";
+import createLocalStorageAdapter from "@signal/localstorage";
 
 export class Database {
-  private db: PouchDB.Database = new PouchDB("moonlight");
+  private readonly PLAYER_DOC_TYPE = "player";
+  private playersCollection: Collection<any>;
 
   constructor() {
-    this.db = new PouchDB("moonlight");
-    
-  }
-
-  private async createIndexes() {
-    await this.db.createIndex({
-      index: { fields: ["name"] },
+    this.playersCollection = new Collection({
+      name: this.PLAYER_DOC_TYPE,
+      persistence: createLocalStorageAdapter(this.PLAYER_DOC_TYPE),
     });
   }
 
-  async savePlayer(player: Player): Promise<void> {
+  /** Save or update a player */
+  savePlayer(player: Player): void {
     const info = player.getInformation();
-
-    const doc = {
-      _id: info.identifier,
-      name: info.name.toLowerCase(),
-      stats: {
-        winCount: info.stats["win"],
-        lossCount: info.stats["loss"],
-      },
-    };
-
-    this.db.put(doc).then(() => {
-      console.log(`💾 Saved player data for ${info.name}`);
-    });
+    this.playersCollection.insert(info);
   }
 
-  async getPlayer(identifier: string): Promise<Player | null> {
-    try {
-      const doc: any = await this.db.get(identifier);
-      return this.toPlayer(doc);
-    } catch {
-      return null;
-    }
-  }
-
-  async findPlayerByName(name: string): Promise<Player | null> {
-    const result = await this.db.find({
-      selector: { name: name.toLowerCase() },
-      limit: 1,
-    });
-
-    const doc = result.docs[0];
+  /** Get player by identifier */
+  getPlayer(identifier: string): Player | null {
+    const doc = this.playersCollection.findOne({ identifier });
     return doc ? this.toPlayer(doc) : null;
   }
 
-  async getAllPlayers(): Promise<Player[]> {
-    const result = await this.db.allDocs({ include_docs: true });
-    return result.rows
-      .filter((r) => r.doc)
-      .map((r) => this.toPlayer(r.doc as any));
+  /** Find player by name (case-insensitive) */
+  findPlayerByName(name: string): Player | null {
+    const results = this.playersCollection.find({
+      where: (doc: any) => doc.name === name.toLowerCase(),
+      limit: 1,
+    });
+
+    if (!results || results.length === 0) return null;
+    return this.toPlayer(results[0]);
   }
 
+  /** Get all players */
+  getAllPlayers(): Player[] {
+    const docs = this.playersCollection.find({});
+    return docs.map((doc: any) => this.toPlayer(doc));
+  }
+
+  /** Internal: convert stored doc → Player instance */
   private toPlayer(doc: any): Player {
     const player = new Player(doc.name);
     const stats = new Stats();
+
     for (let i = 0; i < (doc.stats?.winCount || 0); i++) stats.incrementWin();
     for (let i = 0; i < (doc.stats?.lossCount || 0); i++) stats.incrementLoss();
+
     player.setStats(stats);
-    (player as any).identifier = doc._id;
+    (player as any).identifier = doc._id || doc.identifier;
+
     return player;
   }
 }

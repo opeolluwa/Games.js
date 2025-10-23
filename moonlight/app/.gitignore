@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+_users
+_replicator
+pouch__all_dbs__
+log.txt
+config.json

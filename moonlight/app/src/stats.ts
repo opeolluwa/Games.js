@@ -6,6 +6,10 @@ export class Stats {
     return this.winCount;
   }
 
+  public setWin(win: number) {
+    this.winCount = win;
+  }
+
   public get loss(): number {
     return this.lossCount;
   }

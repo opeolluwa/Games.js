@@ -1,5 +1,6 @@
-import _ from "lodash";
 import { balloons } from "balloons-js";
+import _ from "lodash";
+import { MAIN_SCREEN_DELAY } from "./constants";
 import {
   gameMainScreen,
   gamePlayScreen,
@@ -9,10 +10,9 @@ import {
   splashScreen,
 } from "./dom";
 import { GameEngine } from "./engine";
-import { Player } from "./player";
-import { replies, emoji } from "./resources";
-import { MAIN_SCREEN_DELAY } from "./constants";
 import { playSound } from "./gameSound";
+import { Player } from "./player";
+import { emoji, replies } from "./resources";
 import {
   generateGuess,
   getItem,
@@ -20,22 +20,19 @@ import {
   writeMachineText,
   writePlayerText,
 } from "./utils";
-import { Database } from "./database";
-
 export class Moonlight extends GameEngine {
   private player?: Player;
   private guess: number;
   private handleSubmit?: (e: SubmitEvent) => void;
   private gameLoopSound?: HTMLAudioElement;
-    private database :  Database;
+  private readonly startingScore = 100;
 
   constructor() {
     super();
     this.guess = generateGuess();
-    this.database = new Database();
   }
 
-  public  init(): void {
+  public init(): void {
     document.addEventListener("DOMContentLoaded", () => {
       this.gameLoopSound = playSound("/sound/game-loop.mp3");
       this.gameLoopSound.loop = true;
@@ -75,8 +72,9 @@ export class Moonlight extends GameEngine {
         `${getItem(replies.welcome)} ${username} ${getItem(emoji.goodFeedBack)}`
       );
 
-       this.player = new Player(username);
-
+      this.player = new Player(username);
+      this.player.getStats.setWin(this.startingScore);
+      //   this.database.savePlayer(this.player);
       //   // 🔹 Fetch or create player
       //   const existingPlayer = await this.database.findPlayerByName(
       //     username.toLowerCase()
@@ -146,13 +144,22 @@ export class Moonlight extends GameEngine {
     if (!this.player) return "continue";
 
     if (playerInput >= target - 5 && playerInput < target) {
-      await this.incrementLoss();
+      this.incrementLoss();
       writeMachineText(getItem(replies.closeTo));
+      writeMachineText(
+        ` you score is now ${this.player.getStats.loss} losses.`
+      );
     } else if (playerInput > target) {
-      await this.incrementLoss();
+      this.incrementLoss();
+      writeMachineText(
+        ` you score is now ${this.player.getStats.loss} losses.`
+      );
       writeMachineText(getItem(replies.greaterThan));
     } else if (playerInput < target) {
-      await this.incrementLoss();
+      this.incrementLoss();
+      writeMachineText(
+        ` you score is now ${this.player.getStats.loss} losses.`
+      );
       writeMachineText(getItem(replies.lessThan));
     } else {
       balloons();
