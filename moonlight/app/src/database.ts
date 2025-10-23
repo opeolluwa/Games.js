@@ -12,7 +12,7 @@ export class Database {
 
   constructor() {
     this.db = new PouchDB("moonlight");
-    this.createIndexes().then((r) => console.log(r));
+    
   }
 
   private async createIndexes() {
@@ -33,7 +33,7 @@ export class Database {
       },
     };
 
-    await this.db.put(doc).then(() => {
+    this.db.put(doc).then(() => {
       console.log(`💾 Saved player data for ${info.name}`);
     });
   }

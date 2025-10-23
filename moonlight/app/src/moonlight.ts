@@ -27,7 +27,7 @@ export class Moonlight extends GameEngine {
   private guess: number;
   private handleSubmit?: (e: SubmitEvent) => void;
   private gameLoopSound?: HTMLAudioElement;
-  private database :  Database;
+    private database :  Database;
 
   constructor() {
     super();
@@ -35,7 +35,7 @@ export class Moonlight extends GameEngine {
     this.database = new Database();
   }
 
-  public async init(): Promise<void> {
+  public  init(): void {
     document.addEventListener("DOMContentLoaded", () => {
       this.gameLoopSound = playSound("/sound/game-loop.mp3");
       this.gameLoopSound.loop = true;
@@ -54,13 +54,13 @@ export class Moonlight extends GameEngine {
     });
   }
 
-  public async start(): Promise<void> {
+  public start(): void {
     super.start();
     writeMachineText("Provide your name to get started.");
     this.waitForName();
   }
 
-  private async waitForName(): Promise<void> {
+  private waitForName(): void {
     this.cleanupListeners();
 
     this.handleSubmit = async (e: SubmitEvent) => {
@@ -75,18 +75,20 @@ export class Moonlight extends GameEngine {
         `${getItem(replies.welcome)} ${username} ${getItem(emoji.goodFeedBack)}`
       );
 
-      // 🔹 Fetch or create player
-      const existingPlayer = await this.database.findPlayerByName(
-        username.toLowerCase()
-      );
-      if (existingPlayer) {
-        this.player = existingPlayer;
-        writeMachineText(`Welcome back, ${username}!`);
-      } else {
-        this.player = new Player(username);
-        await this.database.savePlayer(this.player);
-        writeMachineText("New player profile created!");
-      }
+       this.player = new Player(username);
+
+      //   // 🔹 Fetch or create player
+      //   const existingPlayer = await this.database.findPlayerByName(
+      //     username.toLowerCase()
+      //   );
+      //   if (existingPlayer) {
+      //     this.player = existingPlayer;
+      //     writeMachineText(`Welcome back, ${username}!`);
+      //   } else {
+      //     this.player = new Player(username);
+      //     await this.database.savePlayer(this.player);
+      //     writeMachineText("New player profile created!");
+      //   }
 
       _.delay(injectTypingAnimation, 1000, 1500);
       _.delay(
@@ -162,10 +164,10 @@ export class Moonlight extends GameEngine {
     return "continue";
   }
 
-  private async incrementWin(): Promise<void> {
+  private incrementWin(): void {
     if (!this.player) return;
     this.player.getStats.incrementWin();
-    await this.database.savePlayer(this.player);
+    // await this.database.savePlayer(this.player);
     console.log(
       `🏆 ${this.player.getName()} Wins: ${this.player.getStats.win}, Losses: ${
         this.player.getStats.loss
@@ -173,10 +175,10 @@ export class Moonlight extends GameEngine {
     );
   }
 
-  private async incrementLoss(): Promise<void> {
+  private incrementLoss(): void {
     if (!this.player) return;
     this.player.getStats.incrementLoss();
-    await this.database.savePlayer(this.player);
+    // await this.database.savePlayer(this.player);
     console.log(
       `💔 ${this.player.getName()} Wins: ${this.player.getStats.win}, Losses: ${
         this.player.getStats.loss
