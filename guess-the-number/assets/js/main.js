@@ -24,6 +24,7 @@ loss.style.color = "#ff1a1a";
 loss.style.paddingLeft = "1px";
 let winCount = 0;
 let lossCount = 0;
+let gameStarted = false;
 
 //a function to update cashPrice
 let updateCurrentAmount = function (increment) {
@@ -156,6 +157,7 @@ async function play() {
 
   trigger.removeEventListener("click", play);
   inputFeed.value = "";
+  gameStarted = true;
 }
 
 //guess value control function & value
@@ -200,6 +202,7 @@ let gameOver = function (timeOut) {
   }
 };
 async function updatePlayerData() {
+  if (!gameStarted) return;
   const name = userName.innerText.toUpperCase();
   if (!name) return;
   const player = await db.getPlayer(name);
