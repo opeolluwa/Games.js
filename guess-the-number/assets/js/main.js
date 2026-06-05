@@ -1,179 +1,81 @@
-//refrence user input feed 
-let inputFeed = document.getElementById('inputFeed');
+import { gsap } from "gsap";
+import confetti from "canvas-confetti";
+import { emoji, replies, getItem } from "./data.js";
+import { db, dbReady } from "./database.js";
+import { v4 as uuidv4 } from "uuid";
 
-//refrence the root node
-var node = document.getElementById('node');
-
-/*refrence the send button*/
-var trigger = document.getElementById('triggerSend');
-
-/*refrence the player userName node*/
-let userName = document.getElementById('userName');
-
-//refrence the player cash Price node
-let currentAmount = document.getElementById('currentAmount');
+const inputFeed = document.getElementById("inputFeed"),
+  node = document.getElementById("node"),
+  trigger = document.getElementById("triggerSend"),
+  userName = document.getElementById("userName"),
+  currentAmount = document.getElementById("currentAmount");
 
 //define money player gets on game initialization
 let cashPrice = 100;
 
 const playerName = () => userName.innerText;
 
-//a function that get random element from objects
-let getItem = function(object) {
-  let index = Math.round(Math.random() * (object.length - 1))
-  return object[index];
-}
-
 //live scores
-let win = document.querySelector('#win span');
-let loss = document.querySelector('#loss span');
-win.style.color = '#009900';
-win.style.paddingLeft = '1px';
-loss.style.color = '#ff1a1a';
-loss.style.paddingLeft = '1px';
+let win = document.querySelector("#win span");
+let loss = document.querySelector("#loss span");
+win.style.color = "#009900";
+win.style.paddingLeft = "1px";
+loss.style.color = "#ff1a1a";
+loss.style.paddingLeft = "1px";
 let winCount = 0;
 let lossCount = 0;
-let emoji = {
-
-  //define happy emojis
-  goodFeedBack: [
-     '😊', '😘', '🤗',
-     '💞', '💝', '💓',
-     '💖', '💓', '😍',
-     '😝', '👐', '😚'
-     ],
-
-  //define sad emojis
-  ouchFeedBack: [
-    '😣', '😭', '😩',
-    '😟', '😤', '😢',
-    '😒', '😌', '😔',
-    '😬', '🤧']
-};
-
-//an object with text flow control
-let replies = {
-  //an array of validatePlayerGuess fuction feedback messages
-  greaterThan: [
-        `Try again, your current input  is greater that the number`,
-        `Exceeding\!\n Try a lesser value`,
-        `That's over the top \n, try something lower`,
-        `Ouch! that's way more than the target`
-        ],
-
-
-  //an array of validatePlayerGuess fuction feedback messages
-  lessThan: [
-      `Ouch\! ${getItem(emoji.ouchFeedBack)} your guess is less than the number ${getItem(emoji.ouchFeedBack)}`,
-      `${getItem(emoji.ouchFeedBack)}Try something greater, current input is less than target`,
-      `Aim higher ${userName.innerText}.`,
-      `${userName.innerText}, your guess is not up to the target.`
-       ],
-
-
-  //an array of validatePlayerGuess fuction feedback messages
-  equalTo: [
-        `Awesome!  ${getItem(emoji.goodFeedBack)}that's correct.`,
-        `${getItem(emoji.goodFeedBack)} Ten on Ten \!, your input is correct`,
-        `Incredible😋 that's correct ${getItem(emoji.goodFeedBack)}`,
-        `That's very correct`,
-        `You're UNSTOPPABLE\! That's correct `,
-        `You guessed right ${getItem(emoji.goodFeedBack)}`
-        ],
-
-
-  //an array of validatePlayerGuess fuction feedback messages
-  closeTo: [
-        `Almost there.${getItem(emoji.ouchFeedBack)}`,
-       `That's very close yet less than the number.${getItem(emoji.ouchFeedBack)}.`,
-        `Ouch ${getItem(emoji.ouchFeedBack)} You miss a bit. The target Number is a higher.`,
-        `${getItem(emoji.ouchFeedBack)}...that was so close , try again.`,
-        `That's close `,
-        `You tried ${getItem(emoji.goodFeedBack)}, aim again`
-        ],
-
-
-  //an array of welcome messages
-  welcome: [
-          'Welcome',
-          'Glad to have you',
-          'It\'s good to have you',
-          'You\'re most welcome',
-          'Greetings',
-          'Holla\!',
-          'Welcome, let\'s get started',
-          ]
-
-};
-
-
+let gameStarted = false;
 
 //a function to update cashPrice
-let updateCurrentAmount = function(increment) {
+let updateCurrentAmount = function (increment) {
   cashPrice += increment;
   currentAmount.innerText = `$${cashPrice}.00`;
-}
-//css Object model for async element => 
-let elementStyles = {
-  maxWidth: '45%',
-  backgroundColor: '#1FC5C8',
-  padding: '5px 9px',
-  borderRadius: '8px 25px 25px 18px',
-  marginBottom: '2.5px'
-}
-
-
-
-//a fuctiin that create element and add content to it
+  gsap.fromTo(
+    currentAmount,
+    { scale: 1.35, color: increment > 0 ? "#1FC5C8" : "#ff4444" },
+    { scale: 1, color: "#1FC5C8", duration: 0.45, ease: "back.out(2)", overwrite: true }
+  );
+};
+//a function that create element and add content to it
 function write(sampleText) {
-  //create element asynchronously
-  let element = document.createElement('p');
-  //aee css to element
-  Object.assign(element.style, {
-    maxWidth: '45%',
-    backgroundColor: '#2D2D2D',
-    color: '#fff',
-    padding: '5px 9px',
-    borderRadius: '8px 25px 25px 18px',
-    marginBottom: '12px',
-  })
-  //append the element to root nod
+  let element = document.createElement("p");
+  element.classList.add("msg-bot");
   node.appendChild(element);
+  node.parentElement.scrollTop = node.parentElement.scrollHeight;
+  gsap.from(element, { opacity: 0, x: -20, duration: 0.3, ease: "power2.out" });
   //then...
   //modify sample text
-  sampleText = sampleText.split(' ');
-  //initially addd the first word to the node 
-  //attach text annimation to send message buttonclick event
-  //add the first word to the node 5mili seconds after the send button is clicked
+  sampleText = sampleText.split(" ");
+  //initially add the first word to the node
+  //attach text animation to send message button click event
+  //add the first word to the node 5 milliseconds after the send button is clicked
   element.innerText = sampleText[0];
-  //initially addd the first word to the node 
+  //initially add the first word to the node
   //then...
-  //loop thru the sampleText add each word to the text econtent of the target node every 200 * index of word.length
+  //loop thru the sampleText add each word to the text content of the target node every 200 * index of word.length
   for (let word = 1; word < sampleText.length; word++) {
     window.setTimeout(() => {
       element.innerText += ` ${sampleText[word]}`;
-    }, (word * 125));
-
+    }, word * 125);
   }
   //add sound to each write() function
-  trigger.addEventListener('click', () => { newMsgSound.play() });
-
+  trigger.addEventListener("click", () => {
+    newMsgSound.play();
+  });
 }
-
-
-
 
 function initGamePlay() {
   //if the user provide a name, welcome him
   if (inputFeed.value) {
-    //Capitalize the name 
-    userTextFeed();
+    //Capitalize the name
     let inputFeedValue = inputFeed.value;
-    inputFeedValue = inputFeedValue.split('');
+    inputFeedValue = inputFeedValue.split("");
     inputFeedValue[0] = inputFeedValue[0].toUpperCase();
-    inputFeedValue = inputFeedValue.join('');
+    inputFeedValue = inputFeedValue.join("");
     //write the welcome message
-    write(`${getItem(replies.welcome)} ${inputFeedValue} ${getItem(emoji.goodFeedBack)}`)
+    write(
+      `${getItem(replies.welcome)} ${inputFeedValue} ${getItem(emoji.goodFeedBack)}`,
+    );
     userName.innerText = inputFeedValue;
     currentAmount.innerText = `$${cashPrice}.00`;
   }
@@ -182,158 +84,199 @@ function initGamePlay() {
   //inputFeed.value = '';
 }
 
-
-
-
-//function tht print the player responses to the screen
+//function that prints the player responses to the screen
 function userTextFeed() {
   //create user input node
-  let userInput = document.createElement('p');
+  let userInput = document.createElement("p");
 
-  //add css to element
-  Object.assign(userInput.style, {
-    maxWidth: '45%',
-    backgroundColor: '#1FC5C8',
-    color: '#fff',
-    padding: '5px 9px',
-    borderRadius: '18px',
-    marginTop: '-1rem',
-    position: 'absolute',
-    right: '0',
-  });
+  userInput.classList.add("msg-user");
 
   if (inputFeed.value) {
-    //add the element to the root node
-    node.appendChild(userInput)
+    node.appendChild(userInput);
     userInput.innerText = inputFeed.value;
+    node.parentElement.scrollTop = node.parentElement.scrollHeight;
+    gsap.from(userInput, { opacity: 0, x: 20, duration: 0.25, ease: "power2.out" });
   }
 }
-
 
 //initialize the game play
-write('Provide your name to get started.');
+gsap.from("header", { y: -50, opacity: 0, duration: 0.6, ease: "power3.out" });
 
+gsap.fromTo(".greenstick-left",
+  { rotation: -6 },
+  { rotation: 7, transformOrigin: "50% 100%", duration: 3, repeat: -1, yoyo: true, ease: "sine.inOut" }
+);
+gsap.fromTo(".greenstick-right",
+  { rotation: 6 },
+  { rotation: -7, transformOrigin: "50% 100%", duration: 3.3, repeat: -1, yoyo: true, ease: "sine.inOut", delay: 0.9 }
+);
 
+write("Provide your name to get started.");
 
 //wrap the initialization in a function  for event controls
-function play() {
+async function play() {
+  if (!inputFeed.value) return;
   userTextFeed();
-  initGamePlay()
-  if (localStorage.getItem(inputFeed.value.toUpperCase()) === null) {
-    window.setTimeout(write, 1000, 'You have five trials to guess a number. A correct guess award you $100');
-    window.setTimeout(write, 3000, `a wrong one deduct $20 from  your current balance "${currentAmount.innerText}"`)
-    window.setTimeout(write, 5000, `Let\'s play.\nTake a guess,\nhighest value is ${100}`)
-  }
-  else {
-    window.setTimeout(write, 1000, `${inputFeed.value.toUpperCase()}. You have ${JSON.parse(localStorage.getItem(inputFeed.value.toUpperCase())).cash/20} trials left from last game and $${JSON.parse(localStorage.getItem(inputFeed.value.toUpperCase())).cash}`);
-    window.setTimeout(write, 1700, `Play on, take a guess. The least is ${100 - value}; highest remains 100.`)
-  }
-  trigger.removeEventListener('click', play)
+  initGamePlay();
 
+  const name = inputFeed.value.toUpperCase();
+  await dbReady;
+
+  let player = await db.getPlayer(name);
+
+  if (!player) {
+    await db.createPlayer(name);
+    player = await db.getPlayer(name);
+    await db.saveScore(uuidv4(), player.id, 0, 0, 100);
+    window.setTimeout(
+      write,
+      1000,
+      "You have five trials to guess a number. A correct guess awards you $100",
+    );
+    window.setTimeout(
+      write,
+      3000,
+      `A wrong guess deducts $20 from your balance "${currentAmount.innerText}"`,
+    );
+    window.setTimeout(write, 5000, `Let's play. Take a guess, highest value is 100`);
+  } else {
+    const latest = await db.getLatestScore(player.id);
+    if (latest) {
+      cashPrice = Number(latest.current_amount);
+      currentAmount.innerText = `$${cashPrice}.00`;
+      win.innerText = `${(winCount = latest.win)}`;
+      loss.innerText = `${(lossCount = latest.loss)}`;
+    }
+    window.setTimeout(
+      write,
+      1000,
+      `Welcome back ${name}. You have $${cashPrice} from your last game`,
+    );
+    window.setTimeout(write, 1700, `Play on, take a guess. Highest is 100.`);
+  }
+
+  trigger.removeEventListener("click", play);
+  inputFeed.value = "";
+  gameStarted = true;
 }
-
-
-
 
 //guess value control function & value
 const numberGenerator = () => Math.round(Math.random() * 100);
 let value = numberGenerator();
 
-
-
 //game over control function
-let newGame = function() {
+let newGame = function () {
   if (inputFeed.value == value) {
     //start a new game if player has more cash
     value = numberGenerator();
-    window.setTimeout(write, 2300, `Let's play again ${userName.innerText} ${getItem(emoji.goodFeedBack)} Guess the new number`);
+    window.setTimeout(
+      write,
+      2300,
+      `Let's play again ${userName.innerText} ${getItem(emoji.goodFeedBack)} Guess the new number`,
+    );
     validatePlayerGuess();
   }
-}
+};
 
 //new game control function
-let gameOver = function(timeOut) {
+let gameOver = function (timeOut) {
   //initialize a new game
   if (cashPrice <= 0) {
-    loss.innerText = `${lossCount+=1}`;
+    const missedNumber = value;
+    loss.innerText = `${(lossCount += 1)}`;
+    gsap.fromTo(loss, { scale: 1.6 }, { scale: 1, duration: 0.5, ease: "elastic.out(1, 0.4)", overwrite: true });
     value = numberGenerator();
     cashPrice = 0;
     updateCurrentAmount(100);
-    window.setTimeout(write, timeOut, `${getItem(emoji.ouchFeedBack)}Insufficient funds; unable to continue`);
-    window.setTimeout(write, (timeOut + (timeOut / 4)), `${getItem(emoji.ouchFeedBack)}. Let\'s play again\!\nTake a guess`);
+    window.setTimeout(
+      write,
+      timeOut,
+      `${getItem(emoji.ouchFeedBack)} Insufficient funds. The number was ${missedNumber}`,
+    );
+    window.setTimeout(
+      write,
+      timeOut + timeOut / 4,
+      `${getItem(emoji.ouchFeedBack)}. Let\'s play again\!\nTake a guess`,
+    );
     validatePlayerGuess();
   }
-}
-/*==================database control module==========================================*/
-/* its a two way gate here, if player exist fetch the player data, else makea new player*/
-let modPlayerData = {};
-
-function makePlayer() {
-  if (localStorage.getItem(inputFeed.value.toUpperCase()) === null) {
-
-    //make a player object to keep track of user data
-    class PLAYER {
-      //player constructor
-      constructor(name, cash, win = 0, loss = 0) {
-        this.name = name,
-          this.cash = cash,
-          this.win = win,
-          this.loss = loss
-      }
-      // a function that instantiate player Id in database
-      playerId = () => `$${Date.now()}`
-      //stringify data
-      stringify = () => JSON.stringify(new PLAYER(inputFeed.value.toUpperCase()))
-    }
-    // store the player data using real player name
-    localStorage.setItem(inputFeed.value.toUpperCase(), new PLAYER(inputFeed.value.toUpperCase()).stringify());
-    //parse the made player data as JSON Object
-    modPlayerData = JSON.parse(localStorage.getItem(inputFeed.value.toUpperCase()))
-  }
-  /*code block.for player existence
-  ==> fet the data into variable retrievedPlayerData
-  ==> update the nodes  value & scores
-  */
-  else {
-    let retrievedPlayerData = JSON.parse(localStorage.getItem(inputFeed.value.toUpperCase()));
-    //the update
-    cashPrice = retrievedPlayerData.cash;
-    currentAmount.innerText = `$${cashPrice}.00`;
-    win.innerText = `${ winCount =retrievedPlayerData.win}`;
-    loss.innerText = `${ lossCount =retrievedPlayerData.loss}`;
-  }
-  //error handling
-  trigger.removeEventListener('click', makePlayer);
-  inputFeed.value = '';
 };
-
-//a function to update the database
-function updatePlayerData() {
-  //update current amount from current amount node 
-  modPlayerData.cash = cashPrice;
-  //update current score from current amount node 
-  modPlayerData.win = winCount;
-  modPlayerData.loss = lossCount;
-
-  //update database
-  localStorage.setItem(document.getElementById("userName").innerText.toUpperCase(), JSON.stringify(modPlayerData))
-  //fetch data
-  let data = localStorage.getItem(document.getElementById("userName").innerText.toUpperCase())
-  //log data
-  console.log(data)
+async function updatePlayerData() {
+  if (!gameStarted) return;
+  const name = userName.innerText.toUpperCase();
+  if (!name) return;
+  const player = await db.getPlayer(name);
+  if (player) {
+    await db.saveScore(uuidv4(), player.id, winCount, lossCount, cashPrice);
+  }
 }
-/*==================database control module end==========================================*/
 
 //here's the game play
-trigger.addEventListener('click', () => { newMsgSound.play() });
-trigger.addEventListener('click', play);
-trigger.addEventListener('click', validatePlayerGuess);
-//trigger.addEventListener('click', newGame);
-trigger.addEventListener('click', () => {
-  gameOver(2500);
-})
-trigger.addEventListener('click', makePlayer);
-trigger.addEventListener('click', updatePlayerData);
+inputFeed.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") trigger.click();
+});
+trigger.addEventListener("click", () => {
+  newMsgSound.play();
+});
+trigger.addEventListener("click", play);
+trigger.addEventListener("click", validatePlayerGuess);
+trigger.addEventListener("click", () => { gameOver(2500); });
+trigger.addEventListener("click", () => { updatePlayerData(); });
+
+function spawnBalloons() {
+  const palette = ["#E8927C", "#5a8a80", "#F0B429", "#6BB5C9", "#D4A0E8", "#1FC5C8"];
+  for (let i = 0; i < 6; i++) {
+    const color = palette[i % palette.length];
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", "0 0 50 90");
+    const leftPct = 8 + i * 14 + (Math.random() * 6 - 3);
+    Object.assign(svg.style, {
+      position: "fixed", bottom: "-110px", left: `${leftPct}%`,
+      width: "46px", zIndex: "998", pointerEvents: "none",
+    });
+    svg.innerHTML = `
+      <ellipse cx="25" cy="28" rx="19" ry="24" fill="${color}" opacity="0.92"/>
+      <path d="M19 50 Q25 57 31 50" stroke="${color}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M25 57 Q29 70 25 88" stroke="rgba(255,255,255,0.45)" stroke-width="1.3" fill="none"/>
+    `;
+    document.body.appendChild(svg);
+    gsap.to(svg, {
+      y: -(window.innerHeight + 160),
+      x: (Math.random() - 0.5) * 90,
+      rotation: (Math.random() - 0.5) * 18,
+      duration: 3.2 + i * 0.25 + Math.random() * 1.2,
+      delay: i * 0.18,
+      ease: "power1.out",
+      onComplete: () => svg.remove(),
+    });
+  }
+}
+
+function fireConfetti() {
+  const colors = ["#E8927C", "#5a8a80", "#F0B429", "#6BB5C9", "#1FC5C8", "#ffffff"];
+  confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors });
+  window.setTimeout(() => {
+    confetti({ particleCount: 50, angle: 60,  spread: 55, origin: { x: 0, y: 0.7 }, colors });
+    confetti({ particleCount: 50, angle: 120, spread: 55, origin: { x: 1, y: 0.7 }, colors });
+  }, 280);
+}
+
+function winFlash() {
+  const flash = document.createElement("div");
+  Object.assign(flash.style, {
+    position: "fixed", inset: "0",
+    background: "rgba(255, 215, 50, 0.28)",
+    zIndex: "997", pointerEvents: "none",
+  });
+  document.body.appendChild(flash);
+  gsap.to(flash, { opacity: 0, duration: 0.75, ease: "power2.out", onComplete: () => flash.remove() });
+}
+
+function celebrateWin() {
+  winFlash();
+  fireConfetti();
+  spawnBalloons();
+}
 
 //A function to validate Player Guess
 function validatePlayerGuess() {
@@ -344,27 +287,25 @@ function validatePlayerGuess() {
       userTextFeed();
       write(getItem(replies.closeTo));
       inputFeed.value = "";
-    }
-    else if (inputFeed.value > value) {
+    } else if (inputFeed.value > value) {
       updateCurrentAmount(-20);
       userTextFeed();
       write(getItem(replies.greaterThan));
       inputFeed.value = "";
-    }
-    else if (inputFeed.value < value) {
+    } else if (inputFeed.value < value) {
       updateCurrentAmount(-20);
       userTextFeed();
       write(getItem(replies.lessThan));
       inputFeed.value = "";
-    }
-    else if (inputFeed.value == value) {
+    } else if (inputFeed.value == value) {
       userTextFeed();
-      win.innerText = `${winCount+=1}`;
+      win.innerText = `${(winCount += 1)}`;
+      gsap.fromTo(win, { scale: 1.6 }, { scale: 1, duration: 0.5, ease: "elastic.out(1, 0.4)", overwrite: true });
       newGame(1500);
       updateCurrentAmount(100);
       write(getItem(replies.equalTo));
+      celebrateWin();
       inputFeed.value = "";
     }
   }
-
 }
