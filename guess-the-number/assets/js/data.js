@@ -45,6 +45,9 @@ export const replies = {
     `${getItem(emoji.ouchFeedBack)}Try something greater, current input is less than target`,
     `Aim higher.`,
     `Your guess is not up to the target.`,
+    `Too low — shoot for something bigger.`,
+    `Not quite, the number is higher than that.`,
+    `Think bigger and try again.`,
   ],
   equalTo: [
     `Awesome!  ${getItem(emoji.goodFeedBack)}that's correct.`,

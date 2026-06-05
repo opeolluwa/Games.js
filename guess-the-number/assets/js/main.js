@@ -1,3 +1,5 @@
+import { gsap } from "gsap";
+import confetti from "canvas-confetti";
 import { emoji, replies, getItem } from "./data.js";
 import { db, dbReady } from "./database.js";
 import { v4 as uuidv4 } from "uuid";
@@ -27,6 +29,11 @@ let lossCount = 0;
 let updateCurrentAmount = function (increment) {
   cashPrice += increment;
   currentAmount.innerText = `$${cashPrice}.00`;
+  gsap.fromTo(
+    currentAmount,
+    { scale: 1.35, color: increment > 0 ? "#1FC5C8" : "#ff4444" },
+    { scale: 1, color: "#1FC5C8", duration: 0.45, ease: "back.out(2)", overwrite: true }
+  );
 };
 //a function that create element and add content to it
 function write(sampleText) {
@@ -34,6 +41,7 @@ function write(sampleText) {
   element.classList.add("msg-bot");
   node.appendChild(element);
   node.parentElement.scrollTop = node.parentElement.scrollHeight;
+  gsap.from(element, { opacity: 0, x: -20, duration: 0.3, ease: "power2.out" });
   //then...
   //modify sample text
   sampleText = sampleText.split(" ");
@@ -59,7 +67,6 @@ function initGamePlay() {
   //if the user provide a name, welcome him
   if (inputFeed.value) {
     //Capitalize the name
-    userTextFeed();
     let inputFeedValue = inputFeed.value;
     inputFeedValue = inputFeedValue.split("");
     inputFeedValue[0] = inputFeedValue[0].toUpperCase();
@@ -87,10 +94,22 @@ function userTextFeed() {
     node.appendChild(userInput);
     userInput.innerText = inputFeed.value;
     node.parentElement.scrollTop = node.parentElement.scrollHeight;
+    gsap.from(userInput, { opacity: 0, x: 20, duration: 0.25, ease: "power2.out" });
   }
 }
 
 //initialize the game play
+gsap.from("header", { y: -50, opacity: 0, duration: 0.6, ease: "power3.out" });
+
+gsap.fromTo(".greenstick-left",
+  { rotation: -6 },
+  { rotation: 7, transformOrigin: "50% 100%", duration: 3, repeat: -1, yoyo: true, ease: "sine.inOut" }
+);
+gsap.fromTo(".greenstick-right",
+  { rotation: 6 },
+  { rotation: -7, transformOrigin: "50% 100%", duration: 3.3, repeat: -1, yoyo: true, ease: "sine.inOut", delay: 0.9 }
+);
+
 write("Provide your name to get started.");
 
 //wrap the initialization in a function  for event controls
@@ -163,6 +182,7 @@ let gameOver = function (timeOut) {
   if (cashPrice <= 0) {
     const missedNumber = value;
     loss.innerText = `${(lossCount += 1)}`;
+    gsap.fromTo(loss, { scale: 1.6 }, { scale: 1, duration: 0.5, ease: "elastic.out(1, 0.4)", overwrite: true });
     value = numberGenerator();
     cashPrice = 0;
     updateCurrentAmount(100);
@@ -200,6 +220,61 @@ trigger.addEventListener("click", validatePlayerGuess);
 trigger.addEventListener("click", () => { gameOver(2500); });
 trigger.addEventListener("click", () => { updatePlayerData(); });
 
+function spawnBalloons() {
+  const palette = ["#E8927C", "#5a8a80", "#F0B429", "#6BB5C9", "#D4A0E8", "#1FC5C8"];
+  for (let i = 0; i < 6; i++) {
+    const color = palette[i % palette.length];
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", "0 0 50 90");
+    const leftPct = 8 + i * 14 + (Math.random() * 6 - 3);
+    Object.assign(svg.style, {
+      position: "fixed", bottom: "-110px", left: `${leftPct}%`,
+      width: "46px", zIndex: "998", pointerEvents: "none",
+    });
+    svg.innerHTML = `
+      <ellipse cx="25" cy="28" rx="19" ry="24" fill="${color}" opacity="0.92"/>
+      <path d="M19 50 Q25 57 31 50" stroke="${color}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M25 57 Q29 70 25 88" stroke="rgba(255,255,255,0.45)" stroke-width="1.3" fill="none"/>
+    `;
+    document.body.appendChild(svg);
+    gsap.to(svg, {
+      y: -(window.innerHeight + 160),
+      x: (Math.random() - 0.5) * 90,
+      rotation: (Math.random() - 0.5) * 18,
+      duration: 3.2 + i * 0.25 + Math.random() * 1.2,
+      delay: i * 0.18,
+      ease: "power1.out",
+      onComplete: () => svg.remove(),
+    });
+  }
+}
+
+function fireConfetti() {
+  const colors = ["#E8927C", "#5a8a80", "#F0B429", "#6BB5C9", "#1FC5C8", "#ffffff"];
+  confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors });
+  window.setTimeout(() => {
+    confetti({ particleCount: 50, angle: 60,  spread: 55, origin: { x: 0, y: 0.7 }, colors });
+    confetti({ particleCount: 50, angle: 120, spread: 55, origin: { x: 1, y: 0.7 }, colors });
+  }, 280);
+}
+
+function winFlash() {
+  const flash = document.createElement("div");
+  Object.assign(flash.style, {
+    position: "fixed", inset: "0",
+    background: "rgba(255, 215, 50, 0.28)",
+    zIndex: "997", pointerEvents: "none",
+  });
+  document.body.appendChild(flash);
+  gsap.to(flash, { opacity: 0, duration: 0.75, ease: "power2.out", onComplete: () => flash.remove() });
+}
+
+function celebrateWin() {
+  winFlash();
+  fireConfetti();
+  spawnBalloons();
+}
+
 //A function to validate Player Guess
 function validatePlayerGuess() {
   if (inputFeed.value) {
@@ -222,9 +297,11 @@ function validatePlayerGuess() {
     } else if (inputFeed.value == value) {
       userTextFeed();
       win.innerText = `${(winCount += 1)}`;
+      gsap.fromTo(win, { scale: 1.6 }, { scale: 1, duration: 0.5, ease: "elastic.out(1, 0.4)", overwrite: true });
       newGame(1500);
       updateCurrentAmount(100);
       write(getItem(replies.equalTo));
+      celebrateWin();
       inputFeed.value = "";
     }
   }

@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.1",
+    "canvas-confetti": "^1.9.4",
     "gsap": "^3.15.0",
     "uuid": "^14.0.0"
   }

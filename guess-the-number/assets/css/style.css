@@ -9,11 +9,8 @@
       word-wrap: wrap;
       background: #000;
       scroll-behavior: smooth;
-      background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)),
-        image-set(
-          url('../img/fractal-2065885_1920.webp') type('image/webp'),
-          url('../img/fractal-2065885_1920_compressed.jpg') type('image/jpeg')
-        ) center center no-repeat;
+      background: linear-gradient(to right, rgba(0, 0, 0, .35), rgba(0, 0, 0, .5)),
+        url('../img/fractal.webp') top center no-repeat;
       background-size: cover;
       background-attachment: fixed;
     }
@@ -25,11 +22,28 @@
     }
 
 
+    #bg-glow {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 35% 55%, rgba(74,122,108,0.14) 0%, transparent 60%),
+        radial-gradient(ellipse at 68% 32%, rgba(240,180,41,0.09) 0%, transparent 52%);
+      z-index: 0;
+      pointer-events: none;
+      animation: bgDrift 9s ease-in-out infinite alternate;
+    }
+
+    @keyframes bgDrift {
+      from { opacity: 0.5; transform: scale(1)    translate(0,    0); }
+      to   { opacity: 1;   transform: scale(1.07) translate(8px, -6px); }
+    }
+
     .init {
       border: 6px solid transparent;
       position: relative;
       padding-top: 8.3vh;
       overflow-y: scroll;
+      z-index: 1;
     }
 
     .init header {
@@ -71,18 +85,32 @@
     .init main #input-controls {
       display: flex;
       align-items: center;
-      gap: .5rem;
+      gap: .6rem;
       position: fixed;
       bottom: 0;
       left: 0;
       width: 100vw;
-      height: 10vh;
+      min-height: 10vh;
       z-index: 1000;
-      background: rgba(1, 1, 1, .92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      padding: 0 1rem;
-      border-top: 1px solid rgba(255, 255, 255, .07);
+      background: rgba(4, 4, 8, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: .75rem 1rem;
+      border-top: 1px solid rgba(31, 197, 200, 0.15);
+      box-shadow: 0 -8px 32px rgba(0,0,0,.35), 0 -1px 0 rgba(31,197,200,0.06);
+    }
+
+    /* subtle glow above the footer */
+    .init main #input-controls::before {
+      content: '';
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 18px;
+      background: radial-gradient(ellipse at center, rgba(31,197,200,0.12) 0%, transparent 70%);
+      pointer-events: none;
     }
 
     .init main #input-controls input[type="text"] {
@@ -174,7 +202,6 @@
       border-radius: 4px 18px 18px 18px;
       line-height: 1.55;
       box-shadow: 0 1px 4px rgba(0, 0, 0, .18);
-      animation: popIn .2s ease;
     }
 
     /* user bubble */
@@ -187,10 +214,15 @@
       border-radius: 18px 4px 18px 18px;
       line-height: 1.55;
       box-shadow: 0 1px 4px rgba(31, 197, 200, .15);
-      animation: popIn .15s ease;
     }
 
-    @keyframes popIn {
-      from { opacity: 0; transform: translateY(6px) scale(.97); }
-      to   { opacity: 1; transform: translateY(0) scale(1); }
+    .greenstick {
+      position: fixed;
+      bottom: 10vh;
+      width: 70px;
+      opacity: 0.65;
+      z-index: 2;
+      pointer-events: none;
     }
+    .greenstick-left  { left: 0; }
+    .greenstick-right { right: 0; }
