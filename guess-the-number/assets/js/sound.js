@@ -12,6 +12,6 @@
         this.sound.pause();
       }
     }
-    //manke sound
+    //main sound
   let newMsgSound = new sound('assets/audio/Yahoo-Skipping-Rocks.mp3');
 

@@ -1,0 +1,21 @@
+{
+  "name": "guess-the-number",
+  "version": "1.0.0",
+  "description": "- Interactive number-guessing game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "vite": "^8.0.16"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "^0.5.1",
+    "gsap": "^3.15.0",
+    "uuid": "^14.0.0"
+  }
+}

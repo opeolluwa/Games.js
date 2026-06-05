@@ -9,7 +9,10 @@
   <style>
     body {
       color: #000;
-      background: url(assets/img/light-bulb-doodle-drawing-paper_53876-93993.jpg) bottom center no-repeat;
+      background: image-set(
+          url('assets/img/light-bulb-doodle-drawing-paper_53876-93993.webp') type('image/webp'),
+          url('assets/img/light-bulb-doodle-drawing-paper_53876-93993.jpg') type('image/jpeg')
+        ) bottom center no-repeat;
       background-attachment: fixed;
       background-size: cover;
       height: 100vh;
